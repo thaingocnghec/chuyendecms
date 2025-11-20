@@ -109,7 +109,6 @@ blockquote::after {
 	content: "";
 }
 
-
 /* footer custom */
 
 section {
@@ -192,6 +191,59 @@ section .section-title {
 } 
 
 
+/* search result custom */
+
+.search-form-page {
+    background-color: #fcfaf5 !important;
+}
+
+.search-results-container {
+    max-width: 800px;
+    margin: 4rem auto; /* Thêm khoảng cách trên dưới */
+}
+
+.no-results-message h2 {
+    font-weight: 400;
+    font-size: 1.75rem;
+}
+
+.search-query {
+    font-weight: 700;
+}
+
+/* Tùy chỉnh form tìm kiếm */
+.custom-search-form {
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 0.25rem;
+    padding: 1rem;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.custom-search-form .form-control {
+    border: none !important;
+    font-size: 1.1rem !important;
+    padding-left: 0 !important;
+    box-shadow: none !important;
+}
+
+.custom-search-form .input-group-text {
+    background-color: transparent !important;
+    border: none !important;
+    font-size: 1.2rem;
+    color: #6c757d;
+}
+
+.custom-search-form .btn-success {
+    font-weight: bold;
+    padding: 0.5rem 1.5rem;
+}
+
+.form-control .form-none{
+	   border: none;
+    outline: none;
+    box-shadow: none;
+}
 
 /* -------------------------------------------------------------------------- */
 

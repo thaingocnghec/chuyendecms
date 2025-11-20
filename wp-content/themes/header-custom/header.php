@@ -18,7 +18,7 @@
     <div class="container d-flex align-items-center justify-content-between">
 
       <!-- Logo -->
-      <a class="logo-text" href="<?php echo home_url(); ?>">Nhom H</a>
+      <a class="logo-text" href="<?php echo home_url(); ?>">Nhom E</a>
       <!-- Search form (desktop) -->
 
 
