@@ -49,7 +49,7 @@ function custom_header_styles()
 {
 	wp_enqueue_style(
 		'custom-header-css',
-		get_stylesheet_directory_uri() . '/assets/css/header.css',
+		get_template_directory_uri() . '/assets/css/header.css',
 		array(),
 		'1.0'
 	);
@@ -87,7 +87,40 @@ function my_custom_comment_form($defaults)
 add_filter('comment_form_defaults', 'my_custom_comment_form');
 
 //comment format 
+//sidebar 
+function mytheme_register_sidebars()
+{
+	// Sidebar trái - Categories
+	register_sidebar(array(
+		'name'          => __('Left Sidebar (Categories)', 'mytheme'),
+		'id'            => 'left-sidebar',
+		'description'   => __('Hiển thị danh mục bên trái bài viết.', 'mytheme'),
+		'before_widget' => '<div id="%1$s" class="widget %2$s mb-4">',
+		'after_widget'  => '</div>',
+		'before_title'  => '<h5 class="widget-title mb-3">',
+		'after_title'   => '</h5>',
+	));
 
+	// Sidebar phải - Recent Posts
+	register_sidebar(array(
+		'name'          => __('Right Sidebar (Recent Posts)', 'mytheme'),
+		'id'            => 'right-sidebar',
+		'description'   => __('Hiển thị bài viết mới bên phải.', 'mytheme'),
+		'before_widget' => '<div id="%1$s" class="widget %2$s mb-4">',
+		'after_widget'  => '</div>',
+		'before_title'  => '<h5 class="widget-title mb-3">',
+		'after_title'   => '</h5>',
+	));
+}
+add_action('widgets_init', 'mytheme_register_sidebars');
+
+function theme_single_style()
+{
+	if (is_single()) {
+		wp_enqueue_style('single-style', get_template_directory_uri() . '/assets/css/single-style.css');
+	}
+}
+add_action('wp_enqueue_scripts', 'theme_single_style');
 
 /**
  * Sets up theme defaults and registers support for various WordPress features.
@@ -324,14 +357,14 @@ function twentytwenty_skip_link_focus_fix()
 {
 	// The following is minified via `terser --compress --mangle -- assets/js/skip-link-focus-fix.js`.
 ?>
-<script>
-/(trident|msie)/i.test(navigator.userAgent) && document.getElementById && window.addEventListener && window
-  .addEventListener("hashchange", function() {
-    var t, e = location.hash.substring(1);
-    /^[A-z0-9_-]+$/.test(e) && (t = document.getElementById(e)) && (/^(?:a|select|input|button|textarea)$/i.test(t
-      .tagName) || (t.tabIndex = -1), t.focus())
-  }, !1);
-</script>
+	<script>
+		/(trident|msie)/i.test(navigator.userAgent) && document.getElementById && window.addEventListener && window
+			.addEventListener("hashchange", function() {
+				var t, e = location.hash.substring(1);
+				/^[A-z0-9_-]+$/.test(e) && (t = document.getElementById(e)) && (/^(?:a|select|input|button|textarea)$/i.test(t
+					.tagName) || (t.tabIndex = -1), t.focus())
+			}, !1);
+	</script>
 <?php
 }
 

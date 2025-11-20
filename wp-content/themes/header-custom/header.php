@@ -1,85 +1,79 @@
-<?php
-
-/**
- * Custom Header for header-custom theme
- */
-?>
 <!DOCTYPE html>
 <html <?php language_attributes(); ?>>
 
 <head>
   <meta charset="<?php bloginfo('charset'); ?>">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <?php wp_head(); ?>
 </head>
 
 <body <?php body_class(); ?>>
 
-  <header class="site-header-custom">
-    <div class="container d-flex align-items-center justify-content-between">
+  <header class="main-header shadow-sm bg-white mw-100">
+    <div class="container-fluid"">
+      <nav class=" navbar navbar-expand-lg navbar-light py-2">
 
-      <!-- Logo -->
-      <a class="logo-text" href="<?php echo home_url(); ?>">Nhom I</a>
-      <!-- Search form (desktop) -->
+      <!-- LOGO / SITE TITLE -->
+      <a class=" navbar-brand font-weight-bold text-dark title-lg" style="font-size: 2rem;"
+        href="<?php echo home_url(); ?>">
+        <?php bloginfo('name'); ?>
+      </a>
 
-
-      <form role="search" method="get" class="search-form d-flex" action="<?php echo esc_url(home_url('/')); ?>">
-        <input type="search" class="search-field form-control" placeholder="Search…"
-          value="<?php echo get_search_query(); ?>" name="s" />
-        <button type="submit" class="search-submit btn btn-default">Submit</button>
+      <!-- Nút mở menu trên mobile -->
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMenu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <!-- FORM SEARCH -->
+      <form role="search" method="get" class="form-inline my-2 my-lg-0 mr-3" action="<?php echo home_url('/'); ?>">
+        <input class="form-control form-control-sm mr-2" type="search" name="s" placeholder="Search"
+          aria-label="Search">
+        <button class="btn btn-outline-secondary btn-sm" type="submit">Submit</button>
       </form>
-      <!-- Desktop Menu -->
-      <nav class="main-menu d-none d-md-block">
+      <!-- MENU CHÍNH -->
+      <div class="collapse navbar-collapse text-md " id="navbarMenu">
         <?php
-        wp_nav_menu(array(
+        wp_nav_menu([
           'theme_location' => 'primary',
-          'menu_class'     => 'nav',
-          'container'      => false,
-        ));
+          'container' => false,
+          'menu_class' => 'navbar-nav mx-auto',
+          'fallback_cb' => '__return_false',
+          'depth' => 2,
+          'menu_class' => 'navbar-nav mx-auto',
+        ]);
         ?>
-      </nav>
 
 
 
-      <!-- Icons -->
-      <div class="header-icons d-flex align-items-center">
-        <a href="<?php echo esc_url(home_url('/?s=')); ?>" class="icon"><i class="fa-solid fa-ellipsis"></i>
-        </a>
+        <!-- ICONS -->
+        <ul class="navbar-nav align-items-center">
+          <li class="nav-item mr-3">
+            <a href="<?php echo home_url('/?s=search something.....here'); ?>" class="nav-link text-dark"
+              title="Search">
+              <i class="fas fa-search"></i>
+              <span class="d-none d-lg-inline ml-1">Search</span>
+            </a>
+          </li>
 
-        <a href="<?php echo esc_url(home_url('/?s=')); ?>" class="icon"><i class="fa fa-search"></i>
-        </a>
-        <a class="icon"><i class="fa fa-user"></i>
-
-
-        </a>
+          <li class="nav-item dropdown">
+            <?php if (is_user_logged_in()): ?>
+            <?php $current_user = wp_get_current_user(); ?>
+            <a href="#" class="nav-link dropdown-toggle text-dark" data-toggle="dropdown">
+              <i class="fas fa-user-circle"></i>
+              <span class="d-none d-lg-inline ml-1"><?php echo esc_html($current_user->display_name); ?></span>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right">
+              <a href="<?php echo admin_url(); ?>" class="dropdown-item">Dashboard</a>
+              <a href="<?php echo wp_logout_url(home_url()); ?>" class="dropdown-item text-danger">Logout</a>
+            </div>
+            <?php else: ?>
+            <a href="<?php echo wp_login_url(); ?>" class="nav-link text-dark">
+              <i class="fas fa-user-circle"></i>
+              <span class="d-none d-lg-inline ml-1">Account</span>
+            </a>
+            <?php endif; ?>
+          </li>
+        </ul>
       </div>
-
-      <!-- Mobile toggle -->
-      <button class="mobile-toggle d-md-none"><i class="fa fa-bars"></i></button>
-    </div>
-
-    <!-- Mobile Dropdown Menu -->
-    <div class="mobile-menu d-md-none">
-      <?php
-      wp_nav_menu(array(
-        'theme_location' => 'primary',
-        'menu_class'     => 'mobile-nav',
-        'container'      => false,
-      ));
-      ?>
+      </nav>
     </div>
   </header>
-
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const toggle = document.querySelector('.mobile-toggle');
-      const mobileMenu = document.querySelector('.mobile-menu');
-      toggle.addEventListener('click', () => {
-        mobileMenu.classList.toggle('open');
-      });
-    });
-  </script>
-
-  <?php wp_footer(); ?>
-</body>
-
-</html>

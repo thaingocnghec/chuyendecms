@@ -1,4 +1,29 @@
 /*
- Theme Name: header-custom
- Template: twentytwenty
+Theme Name: Header Custom
+Theme URI: https://example.com/
+Author: Your Name
+Author URI: https://example.com/
+Description: Child theme for Twenty Twenty
+Version: 1.0
+Template: twentytwenty
 */
+
+/* ==========================================================================
+   1. TYPOGRAPHY SYSTEM
+   ========================================================================== */
+
+:root {
+  --font-size-sm: 1.4rem;
+  --font-size-base: 1.6rem;
+  --font-size-md: 1.8rem;
+
+  --font-size-h6: 1.8rem;
+  --font-size-h5: 2.0rem;
+  --font-size-h4: 2.4rem;
+  --font-size-h3: 3.0rem;
+  --font-size-h2: 3.8rem;
+  --font-size-h1: 4.6rem;
+
+  --font-size-title-logo: 2.8rem;
+  --font-size-display: 5.2rem;
+}

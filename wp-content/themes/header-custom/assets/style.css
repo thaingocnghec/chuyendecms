@@ -1,35 +1,45 @@
-/* ----- CSS CẬP NHẬT CHO DANH SÁCH BÌNH LUẬN ----- */
 
-/* Container lớn nhất của khu vực bình luận */
 #comments {
-    background-color: #fff; /* Nền trắng tổng thể */
+    background-color: #fff;
     padding: 2rem 0;
     margin-top: 2rem;
 }
 
-/* Quan trọng: Căn giữa danh sách bình luận */
+
 #comments .comment-list {
-    list-style: none !important; /* Bỏ các số thứ tự 1. 2. */
+    list-style: none !important; 
     padding-left: 0 !important;
-    max-width: 900px; /* Chiều rộng tối đa của danh sách */
-    margin: 0 auto !important; /* Căn giữa danh sách trong trang */
+    max-width: 900px;
+    margin: 0 auto !important; 
+    
 }
 
-/* Bỏ đường kẻ mặc định của theme gốc nếu có */
+.comment-font-size {
+    font-size: 2.2rem !important;  
+}
+
+.comment-font-size p {
+    font-size: 2rem !important;
+}
+
+.comment-font-size span {
+    font-size: 2rem !important;
+}
+
 #comments .comment-list li {
     border: none !important;
     padding: 0 !important;
 }
 
-/* Định dạng cho từng khối bình luận */
+
 #comments .comment-list .comment-item .comment-body {
-    background-color: #f8f9fa !important; /* MÀU NỀN XÁM NHẠT */
+    background-color: #f8f9fa !important; 
     border: 1px solid #e9ecef;
     border-radius: 0.25rem;
-    padding: 1.25rem; /* Thêm padding cho đẹp */
+    padding: 1.25rem; 
 }
 
-/* Tên người bình luận */
+
 #comments .comment-author-name a {
     color: #007bff;
     text-decoration: none;
@@ -39,12 +49,12 @@
     text-decoration: underline;
 }
 
-/* Nội dung bình luận */
+
 #comments .comment-text p {
     margin-bottom: 0;
 }
 
-/* Các link meta (Reply, Edit) */
+
 #comments .comment-meta a {
     color: #6c757d;
     text-decoration: none;
@@ -53,4 +63,8 @@
 #comments .comment-meta a:hover {
     color: #343a40;
     border-bottom-style: solid;
+}
+
+.comment-content {
+	font-size: 1.8rem;
 }
