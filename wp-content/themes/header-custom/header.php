@@ -18,7 +18,7 @@
     <div class="container d-flex align-items-center justify-content-between">
 
       <!-- Logo -->
-      <a class="logo-text" href="<?php echo home_url(); ?>">Nhom E</a>
+      <a class="logo-text" href="<?php echo home_url(); ?>">Nhom I</a>
       <!-- Search form (desktop) -->
 
 
@@ -47,7 +47,9 @@
 
         <a href="<?php echo esc_url(home_url('/?s=')); ?>" class="icon"><i class="fa fa-search"></i>
         </a>
-        <a href="<?php echo home_url('/my-account'); ?>" class="icon"><i class="fa fa-user"></i>
+        <a class="icon"><i class="fa fa-user"></i>
+
+
         </a>
       </div>
 

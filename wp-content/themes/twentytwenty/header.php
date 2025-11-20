@@ -67,6 +67,36 @@
         <!-- Account -->
         <a href="<?php echo esc_url(home_url('/my-account')); ?>" class="btn">
           <i class="fa fa-user"></i>
+          <?php if (is_user_logged_in()) : // Nếu người dùng đã đăng nhập 
+          ?>
+
+            <li class="nav-item dropdown">
+              <a class="nav-link nav-icon-item dropdown-toggle" href="#" id="accountDropdown" role="button"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-user-circle fa-lg"></i>
+                <span class="nav-icon-text">Account</span>
+              </a>
+              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="accountDropdown">
+                <a class="dropdown-item" href="<?php echo get_edit_user_link(); ?>">Hồ sơ</a>
+                <a class="dropdown-item" href="<?php echo admin_url(); ?>">Bảng điều khiển</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="<?php echo wp_logout_url(get_permalink()); ?>">Đăng xuất</a>
+              </div>
+            </li>
+
+          <?php else: // Nếu người dùng CHƯA đăng nhập 
+          ?>
+
+            <li class="nav-item">
+              <a class="nav-link nav-icon-item" href="<?php echo wp_login_url(get_permalink()); ?>">
+                <i class="fas fa-sign-in-alt fa-lg"></i> <?php // Icon đăng nhập 
+                                                          ?>
+                <span class="nav-icon-text">Login</span>
+              </a>
+            </li>
+
+          <?php endif; // Kết thúc câu lệnh điều kiện 
+          ?>
         </a>
 
         <!-- Mobile Toggle -->
