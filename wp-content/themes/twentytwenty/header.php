@@ -1,124 +1,185 @@
 <?php
-
 /**
- * Header file for the Twenty Twenty WordPress default theme.
- *
- * @link https://developer.wordpress.org/themes/basics/template-files/#template-partials
+ * Custom Header file for Group C (Bootstrap + Font Awesome)
  *
  * @package WordPress
  * @subpackage Twenty_Twenty
- * @since Twenty Twenty 1.0
  */
-
 ?>
+
 <!DOCTYPE html>
-
-<html class="no-js" <?php language_attributes(); ?>>
-
+<html <?php language_attributes(); ?>>
 <head>
-
   <meta charset="<?php bloginfo('charset'); ?>">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <link rel="profile" href="https://gmpg.org/xfn/11">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
   <?php wp_head(); ?>
 
+  <style>
+    /* ======== HEADER STYLE ======== */
+    .custom-header {
+      background-color: #fff;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .navbar-toggler {
+      border: none;
+    }
+
+    .navbar-toggler:focus {
+      box-shadow: none;
+    }
+
+    .main-menu li a {
+      color: #333;
+      font-weight: 500;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .main-menu li a:hover {
+      color: #007bff;
+    }
+
+    /* ======== SEARCH FORM STYLE ======== */
+    .search-form {
+      display: flex;
+      align-items: center;
+      max-width: 280px;
+    }
+
+    .search-form input[type="search"] {
+      border: 1px solid #ccc;
+      border-right: none;
+      height: 34px;
+      font-size: 14px;
+      padding: 4px 8px;
+      color: #333;
+      flex: 1;
+    }
+
+    .search-form input:focus {
+      border-color: #007bff;
+      outline: none;
+      box-shadow: none;
+    }
+
+    .search-form button {
+      border: 1px solid #ccc;
+      background-color: #f8f9fa;
+      height: 34px;
+      padding: 0 12px;
+      font-size: 14px;
+      color: #333;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .search-form button:hover {
+      background-color: #e9ecef;
+      border-color: #999;
+    }
+
+    @media (max-width: 992px) {
+      .d-flex.align-items-center.gap-3.flex-grow-1 {
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+      }
+      .search-form {
+        width: 100%;
+        margin-top: 10px;
+      }
+    }
+  </style>
 </head>
 
 <body <?php body_class(); ?>>
+<?php wp_body_open(); ?>
 
-  <?php
-  wp_body_open();
-  ?>
+<header id="site-header" class="custom-header py-2">
+  <div class="container">
+    <nav class="navbar navbar-expand-lg navbar-light bg-white">
 
-  <header class="site-header py-2 border-bottom">
-    <div class="container d-flex align-items-center justify-content-between">
+      <!-- LOGO -->
+      <a class="navbar-brand fw-bold text-dark" href="<?php echo esc_url(home_url('/')); ?>">Group C</a>
 
-      <!-- Logo -->
-      <a href="<?php echo esc_url(home_url('/')); ?>" class="navbar-brand font-weight-bold">
-        Demo
-      </a>
-      <!-- Search form (desktop) -->
-      <form role="search" method="get" class="d-none d-md-block mr-3" action="<?php echo esc_url(home_url('/')); ?>">
-        <input type="search" class="form-control" placeholder="Search..." name="s" value="<?php the_search_query(); ?>">
-      </form>
-      <!-- Desktop Menu -->
-      <nav class="d-none d-md-block flex-grow-1 text-center">
-        <?php
-        wp_nav_menu([
-          'theme_location' => 'primary',
-          'container'      => false,
-          'menu_class'     => 'nav justify-content-center',
-        ]);
-        ?>
-      </nav>
+      <!-- Mobile Toggle -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarGroupC" aria-controls="navbarGroupC" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-      <!-- Search icon + account icon -->
-      <div class="header-icons d-flex align-items-center">
+      <div class="collapse navbar-collapse justify-content-between" id="navbarGroupC">
 
+        <!-- LEFT: Home + Search -->
+        <div class="d-flex align-items-center gap-3 flex-grow-1">
+          <a href="<?php echo esc_url(home_url('/')); ?>" class="btn btn-light px-3 py-1">Home</a>
 
+          <!-- SEARCH FORM -->
+          <form role="search" method="get" class="search-form" action="<?php echo esc_url(home_url('/')); ?>">
+            <input type="search" name="s" placeholder="Search" value="<?php echo get_search_query(); ?>">
+            <button type="submit">Submit</button>
+          </form>
+        </div>
 
-        <!-- Search icon (mobile) -->
-        <button class="btn d-md-none mr-2">
-          <i class="fa fa-search"></i>
-        </button>
-
-        <!-- Account -->
-        <a href="<?php echo esc_url(home_url('/my-account')); ?>" class="btn">
-          <i class="fa fa-user"></i>
-          <?php if (is_user_logged_in()) : // Nếu người dùng đã đăng nhập 
+        <!-- CENTER: MENU -->
+        <nav class="mx-4">
+          <?php
+          wp_nav_menu(array(
+              'theme_location' => 'primary',
+              'menu_class'     => 'main-menu d-flex list-unstyled mb-0 gap-4',
+              'container'      => false,
+              'fallback_cb'    => '__return_false',
+              'depth'          => 1
+          ));
           ?>
+        </nav>
 
-            <li class="nav-item dropdown">
-              <a class="nav-link nav-icon-item dropdown-toggle" href="#" id="accountDropdown" role="button"
-                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="fas fa-user-circle fa-lg"></i>
-                <span class="nav-icon-text">Account</span>
-              </a>
-              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="accountDropdown">
-                <a class="dropdown-item" href="<?php echo get_edit_user_link(); ?>">Hồ sơ</a>
-                <a class="dropdown-item" href="<?php echo admin_url(); ?>">Bảng điều khiển</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="<?php echo wp_logout_url(get_permalink()); ?>">Đăng xuất</a>
-              </div>
-            </li>
+        <!-- RIGHT: ICONS -->
+        <div class="d-flex align-items-center gap-3 mt-2 mt-lg-0">
+          <!-- Menu -->
+          <button class="btn btn-link text-dark d-flex flex-column align-items-center">
+            <i class="fa-solid fa-ellipsis"></i>
+            <small>Menu</small>
+          </button>
 
-          <?php else: // Nếu người dùng CHƯA đăng nhập 
-          ?>
+          <!-- Search -->
+          <a href="<?php echo esc_url(home_url('/')); ?>?s=" class="btn btn-link text-dark d-flex flex-column align-items-center">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <small>Search</small>
+          </a>
 
-            <li class="nav-item">
-              <a class="nav-link nav-icon-item" href="<?php echo wp_login_url(get_permalink()); ?>">
-                <i class="fas fa-sign-in-alt fa-lg"></i> <?php // Icon đăng nhập 
-                                                          ?>
-                <span class="nav-icon-text">Login</span>
-              </a>
-            </li>
-
-          <?php endif; // Kết thúc câu lệnh điều kiện 
-          ?>
-        </a>
-
-        <!-- Mobile Toggle -->
-        <button class="btn d-md-none ml-2" data-toggle="collapse" data-target="#mobileMenu">
-          <i class="fa fa-bars"></i>
-        </button>
+          <!-- Account -->
+          <div class="dropdown">
+            <button class="btn btn-link text-dark dropdown-toggle d-flex flex-column align-items-center" data-bs-toggle="dropdown">
+              <i class="fa-solid fa-user-circle"></i>
+              <small>Account</small>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end shadow-sm">
+              <li><a class="dropdown-item" href="#">Profile</a></li>
+              <li><a class="dropdown-item" href="#">Settings</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="#">Logout</a></li>
+            </ul>
+          </div>
+        </div>
       </div>
-    </div>
+    </nav>
+  </div>
+</header>
 
-    <!-- Mobile Menu -->
-    <div class="collapse d-md-none" id="mobileMenu">
-      <?php
-      wp_nav_menu([
-        'theme_location' => 'primary',
-        'container'      => false,
-        'menu_class'     => 'nav flex-column p-3',
-      ]);
-      ?>
-    </div>
-  </header>
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
-
-  <?php
-  // Output the menu modal.
-  get_template_part('template-parts/modal-menu');
+<?php wp_footer(); ?>
+</body>
+</html>

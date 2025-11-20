@@ -1,24 +1,37 @@
-<div class="container">
-  <div class="row row justify-content-center">
-    <div class="col-12 col-md-10 col-lg-8">
+<?php
+/**
+ * The searchform.php template.
+ *
+ * Used any time that get_search_form() is called.
+ *
+ * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
+ *
+ * @package WordPress
+ * @subpackage Twenty_Twenty
+ * @since Twenty Twenty 1.0
+ */
 
-      <div class="custom-search-form">
-        <form role="search" method="get" class="search-form" action="<?php echo esc_url(home_url('/')); ?>">
-          <div class="input-group input-group-lg">
-            <div class="input-group-prepend">
-              <span class="input-group-text"><i class="fas fa-search"></i></span>
-            </div>
-            <input type="search" class="form-control form-none"
-              placeholder="<?php echo esc_attr_x('Search topics or keywords', 'placeholder', 'search-page-custom-theme'); ?>"
-              value="<?php echo get_search_query(); ?>" name="s" />
-            <div class="input-group-append">
-              <button type="submit"
-                class="btn btn-success"><?php echo _x('Search', 'submit button', 'search-page-custom-theme'); ?></button>
-            </div>
-          </div>
-        </form>
-      </div>
+/*
+ * Generate a unique ID for each form and a string containing an aria-label
+ * if one was passed to get_search_form() in the args array.
+ */
+$twentytwenty_unique_id = twentytwenty_unique_id( 'search-form-' );
 
-    </div>
-  </div>
-</div>
+$twentytwenty_aria_label = ! empty( $args['aria_label'] ) ? 'aria-label="' . esc_attr( $args['aria_label'] ) . '"' : '';
+// Backward compatibility, in case a child theme template uses a `label` argument.
+if ( empty( $twentytwenty_aria_label ) && ! empty( $args['label'] ) ) {
+	$twentytwenty_aria_label = 'aria-label="' . esc_attr( $args['label'] ) . '"';
+}
+?>
+<form role="search" <?php echo $twentytwenty_aria_label; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Escaped above. ?> method="get" class="search-form" action="<?php echo esc_url( home_url( '/' ) ); ?>">
+	<label for="<?php echo esc_attr( $twentytwenty_unique_id ); ?>">
+		<span class="screen-reader-text">
+			<?php
+			/* translators: Hidden accessibility text. */
+			_e( 'Search for:', 'twentytwenty' ); // phpcs:ignore: WordPress.Security.EscapeOutput.UnsafePrintingFunction -- core trusts translations
+			?>
+		</span>
+		<input type="search" id="<?php echo esc_attr( $twentytwenty_unique_id ); ?>" class="search-field" placeholder="<?php echo esc_attr_x( 'Search &hellip;', 'placeholder', 'twentytwenty' ); ?>" value="<?php echo get_search_query(); ?>" name="s" />
+	</label>
+	<input type="submit" class="search-submit" value="<?php echo esc_attr_x( 'Search', 'submit button', 'twentytwenty' ); ?>" />
+</form>
