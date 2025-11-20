@@ -91,6 +91,78 @@
       font-size: 12px;
     }
   }
+
+  /* css pre post */
+  .wrapper-prepost {
+    max-width: 800px;
+    margin: 10px auto;
+    padding: 40px;
+    margin-left: 115px;
+    position: relative;
+  }
+
+  .widget-latest-posts ul {
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 0;
+  }
+
+  .widget-latest-posts li {
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #eee;
+  }
+
+  .widget-latest-posts li:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+  }
+
+  .post-date {
+    text-align: center;
+    font-weight: bold;
+    color: #555;
+    min-width: 50px;
+  }
+
+  .post-date .day {
+    font-size: 1.5rem;
+    line-height: 1;
+    display: block;
+  }
+
+  .post-date .month-year {
+    font-size: 0.8rem;
+    line-height: 1;
+    display: block;
+  }
+
+  .post-date hr {
+    margin-top: 0.25rem;
+    margin-bottom: 0.25rem;
+    border-top: 2px solid #ccc;
+  }
+
+  .post-title h5 {
+    margin-bottom: 0;
+    font-size: 1rem;
+  }
+
+  .post-title h5 a {
+    color: #007bff;
+    text-decoration: none;
+  }
+
+  .post-title h5 a:hover {
+    color: #0056b3;
+    text-decoration: underline;
+  }
+
+  .related-posts-navigation-font {
+    font-size: 2rem;
+    font-weight: bold;
+  }
 </style>
 
 <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
@@ -119,5 +191,67 @@
 
 <?php endwhile;
 endif; ?>
+
+<div class="wrapper-prepost">
+  <div class="related-posts-navigation related-posts-navigation-font">
+    <div class="widget-latest-posts">
+      <?php
+      $prev_post = get_previous_post();
+
+      $next_post = get_next_post();
+
+      if (! empty($prev_post) || ! empty($next_post)) :
+      ?>
+        <ul>
+          <?php
+          if (! empty($prev_post)) :
+          ?>
+            <li>
+              <div class="d-flex align-items-start">
+                <div class="post-date mr-3">
+                  <span class="day"><?php echo get_the_date('d', $prev_post->ID); ?></span>
+                  <hr>
+                  <span class="month-year"><?php echo get_the_date('m-y', $prev_post->ID); ?></span>
+                </div>
+                <div class="post-title">
+                  <h5>
+                    <a href="<?php echo esc_url(get_permalink($prev_post->ID)); ?>">
+                      <?php echo esc_html($prev_post->post_title); ?>
+                    </a>
+                  </h5>
+                </div>
+              </div>
+            </li>
+          <?php
+          endif;
+
+          if (! empty($next_post)) :
+          ?>
+            <li>
+              <div class="d-flex align-items-start">
+                <div class="post-date mr-3">
+                  <span class="day"><?php echo get_the_date('d', $next_post->ID); ?></span>
+                  <hr>
+                  <span class="month-year"><?php echo get_the_date('m-y', $next_post->ID); ?></span>
+                </div>
+                <div class="post-title">
+                  <h5>
+                    <a href="<?php echo esc_url(get_permalink($next_post->ID)); ?>">
+                      <?php echo esc_html($next_post->post_title); ?>
+                    </a>
+                  </h5>
+                </div>
+              </div>
+            </li>
+          <?php
+          endif;
+          ?>
+        </ul>
+      <?php
+      endif; // Kết thúc kiểm tra có bài viết hay không
+      ?>
+    </div>
+  </div>
+</div>
 
 <?php get_footer(); ?>
