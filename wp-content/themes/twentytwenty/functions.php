@@ -34,7 +34,7 @@ function mytheme_enqueue_styles()
 	// CSS Bootstrap (nếu muốn thêm Bootstrap)
 	wp_enqueue_style('bootstrap', 'https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css');
 
-	// CSS của bạn
+	// CSS
 	wp_enqueue_style(
 		'news-style',
 		get_stylesheet_directory_uri() . '/assets/css/news.css',
@@ -43,6 +43,20 @@ function mytheme_enqueue_styles()
 	);
 }
 add_action('wp_enqueue_scripts', 'mytheme_enqueue_styles');
+
+// header custom 
+function custom_header_styles()
+{
+	wp_enqueue_style(
+		'custom-header-css',
+		get_stylesheet_directory_uri() . '/assets/css/header.css',
+		array(),
+		'1.0'
+	);
+}
+add_action('wp_enqueue_scripts', 'custom_header_styles');
+
+
 /**
  * Sets up theme defaults and registers support for various WordPress features.
  *
