@@ -163,8 +163,73 @@
     font-size: 2rem;
     font-weight: bold;
   }
+
+  /* form comment  */
+  #respond.custom-comment-form-card {
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+    border-radius: 0.25rem;
+    margin-top: 3rem;
+    /* Khoảng cách với nội dung bài viết */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.07);
+  }
+
+  /* Định dạng cho tiêu đề "Make a Post" để tạo hiệu ứng TAB */
+  #respond.custom-comment-form-card .comment-reply-title {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #495057;
+    padding: 0.75rem 1.25rem;
+    margin: -1px -1px 0 -1px;
+    /* Dịch chuyển để viền trùng nhau */
+
+    /* Viền cho hiệu ứng tab */
+    border-bottom: 1px solid #dee2e6;
+    /* Đường ngăn cách với body */
+    border: 1px solid #dee2e6;
+
+    /* Quan trọng: Bỏ viền dưới của chính nó để nối liền với body */
+    border-bottom: none;
+
+    border-radius: 0.25rem 0.25rem 0 0;
+    width: auto;
+    /* Để tab chỉ rộng bằng nội dung chữ */
+    display: inline-block;
+    /* Để width: auto có tác dụng */
+  }
+
+  /* Phần thân của form */
+  #respond.custom-comment-form-card .comment-form {
+    padding: 1.25rem;
+  }
+
+  /* Ô nhập liệu */
+  #respond.custom-comment-form-card textarea#comment {
+    border-radius: 0.25rem !important;
+  }
+
+  /* Nút gửi bình luận */
+  #respond.custom-comment-form-card .form-submit input#submit {
+    /* Class Bootstrap đã được gán, đây là tùy chỉnh nhỏ */
+    font-weight: normal;
+    text-transform: lowercase;
+  }
+
+  /* Căn lề cho nút */
+  #respond.custom-comment-form-card .form-submit {
+    margin-top: 1rem;
+    margin-bottom: 0;
+    text-align: right;
+  }
+
+  /* Xóa bỏ các dòng thông tin thừa của WordPress */
+  #respond.custom-comment-form-card .comment-notes,
+  #respond.custom-comment-form-card .logged-in-as {
+    display: none;
+  }
 </style>
 
+<!-- Detail post -->
 <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
 
     <div class="single-wrapper">
@@ -191,7 +256,7 @@
 
 <?php endwhile;
 endif; ?>
-
+<!-- pre - next post  -->
 <div class="wrapper-prepost">
   <div class="related-posts-navigation related-posts-navigation-font">
     <div class="widget-latest-posts">
@@ -254,4 +319,19 @@ endif; ?>
   </div>
 </div>
 
+<!-- comment post -->
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-lg-8 col-md-10">
+      <?php
+      // If comments are open or we have at least one comment, load up the comment template.
+      if (comments_open() || get_comments_number()) {
+        comments_template();
+      }
+      ?>
+    </div>
+  </div>
+</div>
+
+<!-- footer -->
 <?php get_footer(); ?>

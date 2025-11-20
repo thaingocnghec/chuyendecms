@@ -56,6 +56,38 @@ function custom_header_styles()
 }
 add_action('wp_enqueue_scripts', 'custom_header_styles');
 
+//search page custom 
+
+//form comment custom 
+function my_custom_comment_form($defaults)
+{
+
+	// 1. Tùy biến ô nhập liệu chính (textarea)
+	$defaults['comment_field'] = '
+        <div class="form-group comment-form-comment">
+            <textarea id="comment" name="comment" class="form-control" cols="45" rows="4" placeholder="What are you thinking..." maxlength="65525" required="required"></textarea>
+        </div>';
+
+	// 2. Tùy biến nút gửi (submit)
+	$defaults['submit_button'] = '<button name="%1$s" type="submit" id="%2$s" class="%3$s">%4$s</button>';
+	$defaults['submit_field'] = '<div class="form-submit text-right">%1$s %2$s</div>';
+
+	// 3. Tùy biến các class và chữ
+	$defaults['class_submit'] = 'btn btn-primary';
+	$defaults['label_submit'] = 'share';
+
+	// 4. Tùy biến tiêu đề
+	$defaults['title_reply'] = 'Make a Post';
+
+	// 5. QUAN TRỌNG: Thêm lại class bọc ngoài để KÍCH HOẠT giao diện Card
+	$defaults['class_container'] = 'custom-comment-form-card';
+
+	return $defaults;
+}
+add_filter('comment_form_defaults', 'my_custom_comment_form');
+
+//comment format 
+
 
 /**
  * Sets up theme defaults and registers support for various WordPress features.
@@ -292,14 +324,14 @@ function twentytwenty_skip_link_focus_fix()
 {
 	// The following is minified via `terser --compress --mangle -- assets/js/skip-link-focus-fix.js`.
 ?>
-	<script>
-		/(trident|msie)/i.test(navigator.userAgent) && document.getElementById && window.addEventListener && window
-			.addEventListener("hashchange", function() {
-				var t, e = location.hash.substring(1);
-				/^[A-z0-9_-]+$/.test(e) && (t = document.getElementById(e)) && (/^(?:a|select|input|button|textarea)$/i.test(t
-					.tagName) || (t.tabIndex = -1), t.focus())
-			}, !1);
-	</script>
+<script>
+/(trident|msie)/i.test(navigator.userAgent) && document.getElementById && window.addEventListener && window
+  .addEventListener("hashchange", function() {
+    var t, e = location.hash.substring(1);
+    /^[A-z0-9_-]+$/.test(e) && (t = document.getElementById(e)) && (/^(?:a|select|input|button|textarea)$/i.test(t
+      .tagName) || (t.tabIndex = -1), t.focus())
+  }, !1);
+</script>
 <?php
 }
 
